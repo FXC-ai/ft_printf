@@ -3,5 +3,7 @@
 
 # define LST_TYPES "cspdiuxX%"
 
+#include <stdarg.h>
+
 
 #endif
