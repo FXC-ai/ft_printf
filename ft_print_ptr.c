@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbrhex_fd.c                                  :+:      :+:    :+:   */
+/*   ft_print_ptr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/19 11:26:45 by fcoindre          #+#    #+#             */
-/*   Updated: 2022/11/19 12:51:30 by fcoindre         ###   ########.fr       */
+/*   Created: 2022/11/19 11:25:37 by fcoindre          #+#    #+#             */
+/*   Updated: 2022/11/19 17:41:14 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putnbrhex_fd(unsigned long n, int fd)
+void	ft_print_ptr(va_list args, int *c_count)
 {
-	unsigned long		display_n;
-	char				display_n_char;
-	char 				*base;
+	unsigned long ptr_to_print;
 
-	base = "0123456789abcdef";
-	display_n_char = 0;
-	if (n == 0)
-		ft_putchar_fd('0', fd);
-	if (n >= 1)
+	ptr_to_print = va_arg(args, unsigned long);
+	ft_putstr_fd("0x",1);
+	*c_count += 2;
+	ft_putnbrhex_fd(ptr_to_print, 1);
+	if (ptr_to_print == 0)
+		*c_count += 1;
+	while (ptr_to_print >= 1)
 	{
-		display_n = n % 16;
-		n = n / 16;
-		if (n > 0)
-			ft_putnbrhex_fd(n, fd);
-		display_n_char = base[display_n];
-		ft_putchar_fd(display_n_char, fd);
+		ptr_to_print = ptr_to_print / 16;
+		*c_count += 1;
 	}
 }
