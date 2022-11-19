@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdarg.h>
+#include <limits.h>
 #include "libft/libft.h"
 
 void foo(char *fmt, ...);
@@ -24,11 +25,12 @@ int main()
 	printf("TEST %%i : %i\n", 012);
 	printf("TEST %%i : %i\n", 033);
 
-	unsigned int un = 2147483644;
+	unsigned int un = 2147483649;
 	printf("TEST %%u : %u\n", un);
+	printf("TEST %%u : %u\n", UINT_MAX);
 
-	printf("TEST %%x : %x\n", 15);
-	printf("TEST %%x : %x\n", 0x12f);
+	printf("TEST %%x : %x\n", -1598);
+	printf("TEST %%x : %x\n", -0x12f);
 
 	printf("TEST %%X : %X\n", 15);
 	printf("TEST %%X : %X\n", 0x12f);

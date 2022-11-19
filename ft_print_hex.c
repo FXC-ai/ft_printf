@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
+/*   ft_print_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/19 11:13:05 by fcoindre          #+#    #+#             */
-/*   Updated: 2022/11/19 19:06:49 by fcoindre         ###   ########.fr       */
+/*   Created: 2022/11/19 20:52:30 by fcoindre          #+#    #+#             */
+/*   Updated: 2022/11/19 21:52:04 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_print_nbr(va_list args, int *ptr_c_count)
+void	ft_print_hex(va_list args, int *ptr_c_count)
 {
-	int nbr_to_print;
-	char *nbr_to_print_char;
+	long long hex_to_print;
 
-	nbr_to_print = va_arg(args, int);
+	hex_to_print = va_arg(args, long long);
+	
+	ft_putnbr_hex_fd(hex_to_print, 1);
 
-	ft_putnbr_fd(nbr_to_print, 1);
-
-	nbr_to_print_char = ft_itoa(nbr_to_print);
-
-	*ptr_c_count += ft_strlen(nbr_to_print_char);
-
-	free(nbr_to_print_char);
+	if (hex_to_print == 0)
+		*ptr_c_count += 1;
+	while (hex_to_print >= 1)
+	{
+		hex_to_print = hex_to_print / 16;
+		*ptr_c_count += 1;
+	}
 }

@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
+/*   ft_putnbr_uint_fd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/19 11:13:05 by fcoindre          #+#    #+#             */
-/*   Updated: 2022/11/19 19:06:49 by fcoindre         ###   ########.fr       */
+/*   Created: 2022/11/19 19:10:29 by fcoindre          #+#    #+#             */
+/*   Updated: 2022/11/19 19:20:39 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_print_nbr(va_list args, int *ptr_c_count)
+void	ft_putnbr_uint_fd(unsigned int n, int fd)
 {
-	int nbr_to_print;
-	char *nbr_to_print_char;
+	unsigned int	display_n;
+	int	display_n_char;
 
-	nbr_to_print = va_arg(args, int);
+	display_n_char = 0;
 
-	ft_putnbr_fd(nbr_to_print, 1);
-
-	nbr_to_print_char = ft_itoa(nbr_to_print);
-
-	*ptr_c_count += ft_strlen(nbr_to_print_char);
-
-	free(nbr_to_print_char);
+	if (n == 0)
+		write(fd, "0", 1);
+	if (n >= 1)
+	{
+		display_n = n % 10;
+		n = n / 10;
+		if (n > 0)
+			ft_putnbr_uint_fd(n, fd);
+		display_n_char = display_n + 48;
+		write(fd, &display_n_char, 1);
+	}
 }

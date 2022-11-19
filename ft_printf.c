@@ -6,27 +6,23 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 19:38:20 by fcoindre          #+#    #+#             */
-/*   Updated: 2022/11/19 17:47:02 by fcoindre         ###   ########.fr       */
+/*   Updated: 2022/11/19 21:41:39 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <limits.h>
 #include "ft_printf.h"
 
 static void	ft_print_format(const char c_format, va_list args, int *ptr_c_count)
 {
 	if (c_format == 'c')
 	{
-		char char_to_print = va_arg(args, int);
-		ft_putchar_fd(char_to_print, 1);
-		*ptr_c_count += 1;
+		ft_print_chr(args, ptr_c_count);
 	}
 	else if (c_format == 's')
 	{
 		ft_print_str(args, ptr_c_count);
 	}
-	else if (c_format == 'd')
+	else if (c_format == 'd' || c_format == 'i')
 	{
 		ft_print_nbr(args, ptr_c_count);
 	}
@@ -34,6 +30,20 @@ static void	ft_print_format(const char c_format, va_list args, int *ptr_c_count)
 	{
 		ft_print_ptr(args, ptr_c_count);
 	}
+	else if (c_format == '%')
+	{
+		ft_print_prcent(ptr_c_count);
+	}
+	else if (c_format == 'u')
+	{
+		ft_print_uint(args, ptr_c_count);
+	}
+	else if (c_format == 'x')
+	{
+		ft_print_hex(args, ptr_c_count);
+	}
+	
+	
 	
 }
 
@@ -63,39 +73,3 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return c_count;
 }
-/*
-int main()
-{
-	int count;
-	int count1;
-
-	char non_util2;
-	non_util2 = '0';
-
-	char non_util3;
-	non_util3 = '0';	
-
-	char non_util6;
-	non_util6 = '0';
-
-	count = ft_printf("ft_printf : S:%s C:%c D:%d P:%p\n", NULL, 'c', -1, &non_util3);
-	count1 = printf("   printf : S:%s C:%c D:%d P:%p\n", NULL, 'c', -1, &non_util3);
-	printf("\n");
-	printf("count ft_printf = %d\n", count);
-	printf("count    printf = %d\n", count1);
-
-	printf("\n\n");
-	count = ft_printf("ft_printf : %pp%p%p\n", (void *)LONG_MAX + 423856, (void *)0, (void *)INT_MAX); //: returned: 2, but expected: 3
-	count1 = printf("   printf : %pp%p%p\n", (void *)LONG_MAX + 423856, (void *)0, (void *)INT_MAX);
-	printf("\n");
-	printf("count ft_printf = %d\n", count);
-	printf("count    printf = %d\n", count1);
-	//Error in test 5: ft_printf("%pp%p%p", (void *)LONG_MAX + 423856, (void *)0, (void *)INT_MAX): returned: 31, but expected: 32
-
-
-	//0xa7ffeedcbba61
-	//0x7ffeedcbba61
-	check_leaks();
-
-	return 0;
-}*/

@@ -1,6 +1,6 @@
 HEADIR = includes
 
-SRCS 	= ft_printf.c ft_print_nbr.c ft_print_ptr.c ft_putnbrhex_fd.c ft_print_str.c leacks_cheker_ex.c
+SRCS 	= ft_print_hex.c ft_putnbr_hex_fd.c ft_print_uint.c ft_putnbr_uint_fd.c ft_print_prcent.c ft_print_chr.c ft_printf.c ft_print_nbr.c ft_print_ptr.c ft_putnbrhex_fd.c ft_print_str.c leacks_cheker_ex.c
 
 OBJS	= ${SRCS:.c=.o}
 
