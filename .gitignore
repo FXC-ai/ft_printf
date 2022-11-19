@@ -1,3 +1,6 @@
 test.c
 tests.c
 /a.out.dSYM
+.DS_Store
+*.out
+*.o

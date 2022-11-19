@@ -6,69 +6,14 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 19:38:20 by fcoindre          #+#    #+#             */
-/*   Updated: 2022/11/19 10:50:36 by fcoindre         ###   ########.fr       */
+/*   Updated: 2022/11/19 11:29:05 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <stdio.h>
-#include "libft/libft.h"
 #include "libftprintf.h"
 
-
-void	ft_putnbrhex_fd(unsigned long n, int fd);
-
-void	ft_print_nbr(va_list args, int *c_count)
-{
-	int nbr_to_print;
-
-	nbr_to_print = va_arg(args, int);
-	ft_putnbr_fd(nbr_to_print, 1);
-	*c_count += ft_strlen(ft_itoa(nbr_to_print));
-}
-
-
-void	ft_print_hex(va_list args, int *c_count)
-{
-	unsigned long ptr_to_print;
-	ptr_to_print = va_arg(args, unsigned long);
-	
-	ft_putstr_fd("0x",1);
-	*c_count += 2;
-
-	ft_putnbrhex_fd(ptr_to_print, 1);
-	while (ptr_to_print >= 1)
-	{
-		ptr_to_print = ptr_to_print / 16;
-		*c_count += 1;
-	}
-	
-}
-
-void	ft_putnbrhex_fd(unsigned long n, int fd)
-{
-	unsigned long		display_n;
-	char				display_n_char;
-	char 				*base;
-
-	base = "0123456789abcdef";
-	display_n_char = 0;
-
-	if (n == 0)
-		ft_putchar_fd('0', fd);
-	if (n >= 1)
-	{
-		display_n = n % 16;
-		n = n / 16;
-		if (n > 0)
-			ft_putnbrhex_fd(n, fd);
-		display_n_char = base[display_n];
-		ft_putchar_fd(display_n_char, fd);
-	}	
-	
-}
-
-void	ft_print_format(const char c_format, va_list args, int *c_count)
+static void	ft_print_format(const char c_format, va_list args, int *c_count)
 {
 	if (c_format == 'c')
 	{
@@ -92,7 +37,6 @@ void	ft_print_format(const char c_format, va_list args, int *c_count)
 	}
 	
 }
-
 
 int	ft_printf(const char *str, ...)
 {
