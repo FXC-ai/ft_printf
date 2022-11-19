@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 19:38:20 by fcoindre          #+#    #+#             */
-/*   Updated: 2022/11/18 23:16:00 by fcoindre         ###   ########.fr       */
+/*   Updated: 2022/11/19 10:50:36 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "libft/libft.h"
 #include "libftprintf.h"
 
+
+void	ft_putnbrhex_fd(unsigned long n, int fd);
 
 void	ft_print_nbr(va_list args, int *c_count)
 {
@@ -25,39 +27,46 @@ void	ft_print_nbr(va_list args, int *c_count)
 	*c_count += ft_strlen(ft_itoa(nbr_to_print));
 }
 
-void	ft_print_hex(unsigned long ptr_to_print)
+
+void	ft_print_hex(va_list args, int *c_count)
 {
-	//char c_test = (ptr_to_print % 16) + 48;
+	unsigned long ptr_to_print;
+	ptr_to_print = va_arg(args, unsigned long);
+	
+	ft_putstr_fd("0x",1);
+	*c_count += 2;
 
-	int	mod;
-	int tab[30];
-	int	i;
-	char *base = "0123456789abcdef";
-
-
-	printf("\nptr_to_print = %lu", ptr_to_print);
-	printf("\nptr_to_print = %lx\n", ptr_to_print);
-
-	//ptr_to_print = 4294967295;
-
-	i = 0;
-	while(ptr_to_print > 10)
+	ft_putnbrhex_fd(ptr_to_print, 1);
+	while (ptr_to_print >= 1)
 	{
-		mod = ptr_to_print % 16;
 		ptr_to_print = ptr_to_print / 16;
-		tab[i] = mod;
-		i++;
-		
+		*c_count += 1;
 	}
-
-	while (i >= 0)
-	{
-		write (1, &base[tab[i]], 1);
-		i--;
-	}
-
+	
 }
 
+void	ft_putnbrhex_fd(unsigned long n, int fd)
+{
+	unsigned long		display_n;
+	char				display_n_char;
+	char 				*base;
+
+	base = "0123456789abcdef";
+	display_n_char = 0;
+
+	if (n == 0)
+		ft_putchar_fd('0', fd);
+	if (n >= 1)
+	{
+		display_n = n % 16;
+		n = n / 16;
+		if (n > 0)
+			ft_putnbrhex_fd(n, fd);
+		display_n_char = base[display_n];
+		ft_putchar_fd(display_n_char, fd);
+	}	
+	
+}
 
 void	ft_print_format(const char c_format, va_list args, int *c_count)
 {
@@ -79,8 +88,7 @@ void	ft_print_format(const char c_format, va_list args, int *c_count)
 	}
 	else if (c_format == 'p')
 	{
-		unsigned long ptr_to_print = va_arg(args, unsigned long);
-		ft_print_hex(ptr_to_print);
+		ft_print_hex(args, c_count);
 	}
 	
 }
@@ -127,12 +135,14 @@ int main()
 	char non_util6;
 	non_util6 = '0';
 
-	printf("non : %lu\n", sizeof(&non_util2));
-
-	count = ft_printf("B%s C%c D%d E%p\n", "assin", 'c', 2147463647, &non_util6);
-	count1 = printf("B%s C%c D%d E%p\n", "assin", 'c', 2147463647, &non_util6);
+	count = ft_printf("ft_printf : B:%s C:%c D:%d E:%p\n", "assin", 'c', 2147463647, &non_util3);
+	count1 = printf("   printf : B:%s C:%c D:%d E:%p\n", "assin", 'c', 2147463647, &non_util3);
+	printf("\n");
 	printf("count ft_printf = %d\n", count);
 	printf("count    printf = %d", count1);
+
+	//0xa7ffeedcbba61
+	//0x7ffeedcbba61
 
 
 	return 0;
