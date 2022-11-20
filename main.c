@@ -30,7 +30,7 @@ int main()
 	printf("count    printf = %d\n", count1);
 
 	printf("\n\n");
-	count = ft_printf("ft_printf :  %x %x %x %x %x %x %x\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
+	count = ft_printf("ft_printf : %x %x %x %x %x %x\n", INT_MIN, LONG_MAX, LONG_MIN, UINT_MAX, ULONG_MAX, -42);
 	//count1 = printf("   printf :  %x %x %x %x %x %x %x\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
 	printf("   printf :  %x %x %lx %lx %lx %x %x\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
 	printf("count ft_printf = %d\n", count);
@@ -56,8 +56,6 @@ int main()
 	printf("count ft_printf = %d\n", count);
 	printf("count ft_printf = %d\n", count1);
 
-
-	check_leaks();
 
 	return 0;
 }

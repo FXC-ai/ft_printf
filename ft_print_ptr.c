@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:25:37 by fcoindre          #+#    #+#             */
-/*   Updated: 2022/11/20 14:30:46 by fcoindre         ###   ########.fr       */
+/*   Updated: 2022/11/20 18:11:37 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_putnbr_ptr_fd(unsigned long n, int fd)
 {
 	unsigned long		display_n;
 	char				display_n_char;
-	char 				*base;
+	char				*base;
 
 	base = BASEHEX_MIN;
 	display_n_char = 0;
@@ -35,10 +35,10 @@ static void	ft_putnbr_ptr_fd(unsigned long n, int fd)
 
 void	ft_print_ptr(va_list args, int *ptr_c_count)
 {
-	unsigned long ptr_to_print;
+	unsigned long	ptr_to_print;
 
 	ptr_to_print = va_arg(args, unsigned long);
-	ft_putstr_fd("0x",1);
+	ft_putstr_fd("0x", 1);
 	*ptr_c_count += 2;
 	ft_putnbr_ptr_fd(ptr_to_print, 1);
 	if (ptr_to_print == 0)
