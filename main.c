@@ -18,8 +18,8 @@ int main()
 	non_util6 = '0';
 
 	printf("\n\n");
-	count = ft_printf("ft_printf : %% %% S:%s C:%c D:%d P:%p U:%u x:%x\n", NULL, 'c', -1, &non_util3, 0, 17);
-	count1 = printf("   printf : %% %% S:%s C:%c D:%d P:%p U:%u x:%x\n", NULL, 'c', -1, &non_util3, 0, 17);
+	count = ft_printf("ft_printf : %% %% S:%s C:%c D:%d P:%p U:%u x:%x\n", NULL, 'c', -2147483647, &non_util3, 0, 17);
+	count1 = printf("   printf : %% %% S:%s C:%c D:%d P:%p U:%u x:%x\n", NULL, 'c', -2147483647, &non_util3, 0, 17);
 	printf("count ft_printf = %d\n", count);
 	printf("count    printf = %d\n", count1);
 
@@ -47,6 +47,12 @@ int main()
 	printf("\n\n");
 	count = ft_printf("ft_printf :  %X\n", 2147453647);
 	count1 = printf("   printf :  %X\n", 2147453647);
+	printf("count ft_printf = %d\n", count);
+	printf("count ft_printf = %d\n", count1);
+
+	printf("\n\n");
+	count = ft_printf("ft_printf :  %p\n", 0);
+	count1 = printf("   printf :  %p\n", NULL);
 	printf("count ft_printf = %d\n", count);
 	printf("count ft_printf = %d\n", count1);
 

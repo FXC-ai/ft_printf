@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:13:05 by fcoindre          #+#    #+#             */
-/*   Updated: 2022/11/19 19:06:49 by fcoindre         ###   ########.fr       */
+/*   Updated: 2022/11/20 14:31:45 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	ft_print_nbr(va_list args, int *ptr_c_count)
 {
-	int nbr_to_print;
+	int int_to_print;
 	char *nbr_to_print_char;
 
-	nbr_to_print = va_arg(args, int);
+	int_to_print = va_arg(args, int);
 
-	ft_putnbr_fd(nbr_to_print, 1);
+	ft_putnbr_fd(int_to_print, 1);
 
-	nbr_to_print_char = ft_itoa(nbr_to_print);
+	nbr_to_print_char = ft_itoa(int_to_print);
 
 	*ptr_c_count += ft_strlen(nbr_to_print_char);
 
