@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 19:38:20 by fcoindre          #+#    #+#             */
-/*   Updated: 2022/11/19 21:41:39 by fcoindre         ###   ########.fr       */
+/*   Updated: 2022/11/20 13:00:51 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,11 @@ static void	ft_print_format(const char c_format, va_list args, int *ptr_c_count)
 	}
 	else if (c_format == 'x')
 	{
-		ft_print_hex(args, ptr_c_count);
+		ft_print_hex(args, BASEHEX_MIN, ptr_c_count);
+	}
+	else if (c_format == 'X')
+	{
+		ft_print_hex(args, BASEHEX_MAJ, ptr_c_count);
 	}
 	
 	
